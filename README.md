@@ -5,10 +5,12 @@
 1. 소프트웨어 설치
    - IntelliJ 설치 (완료)
    - mariaDB 설치 (완료)
+      - V11.8
    - Debeaver 설치 (완료)
     
 2. Spring 환경 설정
    - 프로젝트 생성 (완료)
+      - JDK 11
    - maven 설정 (완료)
 
 3. DB 연동
