@@ -31,13 +31,16 @@
 1. REST API <br>
    REST란 "Representational State Transfer" 약자이며, 자원의 상태를 주고받는 것이다. 즉, 자원에 접근하는 방식을 정해놓은 규칙이다. <br>
    REST API는 보통 HTTP를 기반으로 구현된다.
-   - 특징
+   - REST 설계 원칙
      - 자원 중심: URI 자체가 자원을 나타내며 /users, /product 등 명사 형태로 설계된다.
      - HTTP 메서드 기반: GET, POST, PUT, DELETE 등 HTTP 메서드를 사용하여 자원에 대한 CRUD 작업을 수행한다.
      - 무상태성(stateless): 요청 간에 서버가 클라이언트의 상태를 저장하지 않아서 모든 요청은 독립적이어야한다.
-     - 클라이언트-서버 구조: 클라이언트(프론트엔드)와 백엔드(서버)가 역할이 분리되어 독립적으로 개발 가능하다.
      - 계층화 구조: REST 시스템은 중간 서버(프록시, 로그밸런서 등)을 포함할 수 있다.
      - 캐시 처리 가능: HTTP의 캐시 기능을 사용 가능하다.
+     - 일관된 인터페이스: 자원 접근 방식은 일관되어야 하며 모든 API는 비슷한 형식으로 동작해야함
+
+   - RESTful API: REST의 원칙을 철저하게 준수한 API
+   
 
 2. HTTP 통신 <br>
    HTTP(HyperText Transfer protocol)는 텍스트 기반의 통신 규약으로 인터넷에서 데이터를 주고받을 수 있는 프로토콜이다.
