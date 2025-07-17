@@ -83,7 +83,77 @@
 
    (7) 브라우저 렌더링<br>
    - 브라우저는 응답을 받아서 사용자가 보는 웹페이지 완성
-   
+  
+## 3주차 간단한 RESTful API 구현
+
+1. spring boot 환경설정
+   - https://start.spring.io/ 에서 프로젝트 생성 (완료)
+        - Maven
+        - JDK 17
+        - Spring Boot 3.5.3
+   - IDE에서 프로젝트 불러오기 (완료)
+   - Ping API 작성 (완료)
+   <img width="249" height="45" alt="image" src="https://github.com/user-attachments/assets/7850d382-3d11-40f1-81ab-373c82799f43" />
+
+2. 년도 로그인수 API 구현
+   - pom.xml에 dependency 추가 (완료)
+        - mybatis 3.0.3
+        - mariaDB jdbc 2.3.0
+        - junit 4.13.1
+   - application.properties에 datasource 추가 (완료)
+   - mapper 구현 (완료)
+   - service 구현 (완료)
+   - Controller 구현 (완료)
+
+SQL
+
+- 월별 접속자 수
+```sql
+
+SELECT 
+  DATE_FORMAT(login_date, '%Y-%m') AS month,
+  COUNT(DISTINCT user_id) AS visitor_count
+FROM login_logs
+WHERE login_date BETWEEN :startDate AND :endDate
+GROUP BY DATE_FORMAT(login_date, '%Y-%m')
+ORDER BY month;
+
+```
+- 일자 별 접속사 수
+```sql
+SELECT 
+  DATE(login_date) AS date,
+  COUNT(DISTINCT user_id) AS visitor_count
+FROM login_logs
+WHERE login_date BETWEEN :startDate AND :endDate
+GROUP BY DATE(login_date)
+ORDER BY date;
+
+```
+
+- 평균 하루 로그인 수
+```sql
+SELECT 
+  ROUND(COUNT(*) / COUNT(DISTINCT DATE(login_date)), 2) AS avg_daily_login_count
+FROM login_logs
+WHERE login_date BETWEEN :startDate AND :endDate;
+```
+- 휴일을 제외한 로그인 수
+
+- 부서별 월별 로그인 수
+```sql
+SELECT 
+  department,
+  DATE_FORMAT(login_date, '%Y-%m') AS month,
+  COUNT(*) AS login_count
+FROM login_logs
+WHERE login_date BETWEEN :startDate AND :endDate
+GROUP BY department, DATE_FORMAT(login_date, '%Y-%m')
+ORDER BY department, month;
+
+```
+
+
    
        
 
