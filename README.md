@@ -153,6 +153,14 @@ ORDER BY department, month;
 
 ```
 
+## 4주차 RESTful API 추가 구현
+   - REST API 구축 (완료)
+   <img width="296" height="33" alt="image" src="https://github.com/user-attachments/assets/2e9463ca-2d71-4b7b-80dd-5afd8e577dfa" />
+
+
+   - API 가이드 보완 (완료)
+        - 휴일을 제외한 로그인 수 추가 (완료)
+
 
    
        
