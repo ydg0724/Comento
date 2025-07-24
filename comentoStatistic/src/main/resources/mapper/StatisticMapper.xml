@@ -21,7 +21,7 @@
     <select id="selectMonthlyVisitors" parameterType="map" resultType="YearMonthCountDto">
         SELECT DATE_FORMAT(login_date, '%Y-%m') AS yearMonth, COUNT(DISTINCT user_id) AS totCnt
         FROM login_logs
-        WHERE login_date BETWEEN #{startDate} AND #{endDate}
+        WHERE DATE(login_date) BETWEEN #{startDate} AND #{endDate}
         GROUP BY DATE_FORMAT(login_date, '%Y-%m')
     </select>
 
