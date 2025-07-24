@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class StatisticController {
@@ -36,19 +38,25 @@ public class StatisticController {
     @RequestMapping(value = "/api/stats/monthly-visitors",produces = "application/json")
     @ResponseBody
     public List<YearMonthCountDto> getMonthlyVisitors(@RequestParam String startDate, @RequestParam String endDate) {
-        return statisticService.getMonthlyVisitors(startDate, endDate);
+        List<YearMonthCountDto> result = statisticService.getMonthlyVisitors(startDate, endDate);
+        Map<String, Object> response = new HashMap<>();
+        response.put("startDate", result);
+        response.put("endDate", result);
+        response.put("monthlyVisitors", result);
+
+        return ResponseEntity.ok(statisticService.getMonthlyVisitors(startDate, endDate)).getBody();
     }
 
     @RequestMapping(value = "/api/stats/daily-visitors", produces = "application/json")
     @ResponseBody
     public List<YearMonthCountDto> getDailyVisitors(@RequestParam String startDate, @RequestParam String endDate) {
-        return statisticService.getDailyVisitors(startDate, endDate);
+        return ResponseEntity.ok(statisticService.getDailyVisitors(startDate, endDate)).getBody();
     }
 
     @RequestMapping(value = "/api/stats/avg-logins", produces = "application/json")
     @ResponseBody
     public Double getAvgDailyLogins(@RequestParam String startDate, @RequestParam String endDate) {
-        return statisticService.getAvgDailyLogins(startDate, endDate);
+        return ResponseEntity.ok(statisticService.getAvgDailyLogins(startDate, endDate)).getBody();
     }
 
     @RequestMapping(value = "/api/stats/logins-holidays", produces = "application/json")
@@ -59,8 +67,8 @@ public class StatisticController {
 
     @RequestMapping(value = "/api/stats/logins-dept", produces = "application/json")
     @ResponseBody
-    public List<YearMonthCountDto> getDeptMonthlyLogins(@RequestParam String startDate, @RequestParam String endDate) {
-        return statisticService.getDeptMonthlyLogins(startDate, endDate);
+    public List<YearMonthCountDto> getDeptMonthlyLogins(@RequestParam String startDate, @RequestParam String endDate, @RequestParam String dept) {
+        return statisticService.getDeptMonthlyLogins(startDate, endDate, dept);
     }
 
 }

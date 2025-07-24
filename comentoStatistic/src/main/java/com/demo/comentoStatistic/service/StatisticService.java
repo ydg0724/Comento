@@ -52,10 +52,11 @@ public class StatisticService {
     }
 
 
-    public List<YearMonthCountDto> getDeptMonthlyLogins(String startDate, String endDate){
+    public List<YearMonthCountDto> getDeptMonthlyLogins(String startDate, String endDate, String dept){
         Map<String, Object> params = new HashMap<>();
         params.put("startDate", startDate);
         params.put("endDate", endDate);
+        params.put("dept", dept);
         return statisticMapper.selectDeptMonthlyLogin(params);
     }
 
