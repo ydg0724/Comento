@@ -18,4 +18,39 @@
         where left(ri.create_date, 4) = #{yearMonth};
     </select>
 
+    <select id="selectMonthlyVisitors" parameterType="map" resultType="YearMonthCountDto">
+        SELECT DATE_FORMAT(login_date, '%Y-%m') AS yearMonth, COUNT(DISTINCT user_id) AS totCnt
+        FROM login_logs
+        WHERE login_date BETWEEN #{startDate} AND #{endDate}
+        GROUP BY DATE_FORMAT(login_date, '%Y-%m')
+    </select>
+
+    <select id="selectDailyVisitors" parameterType="map" resultType="YearMonthCountDto">
+        SELECT DATE(login_date) AS yearMonth, COUNT(DISTINCT user_id) AS totCnt
+        FROM login_logs
+        WHERE login_date BETWEEN #{startDate} AND #{endDate}
+        GROUP BY DATE(login_date)
+    </select>
+
+    <select id="selectAvgDailyLogin" parameterType="map" resultType="double">
+        SELECT ROUND(COUNT(*) / COUNT(DISTINCT DATE(login_date)), 2)
+        FROM login_logs
+        WHERE login_date BETWEEN #{startDate} AND #{endDate}
+    </select>
+
+    <!-- 4. 휴일 포함 로그인 수 (공휴일 제외는 Java에서 처리) -->
+    <select id="selectTotalLoginCount" parameterType="map" resultType="int">
+        SELECT COUNT(*) FROM login_logs
+        WHERE login_date BETWEEN #{startDate} AND #{endDate}
+    </select>
+
+    <select id="selectDeptMonthlyLogin" parameterType="map" resultType="YearMonthCountDto">
+        SELECT CONCAT(department, '-', DATE_FORMAT(login_date, '%Y-%m')) AS yearMonth,
+               COUNT(*) AS totCnt
+        FROM login_logs
+        WHERE login_date BETWEEN #{startDate} AND #{endDate}
+        GROUP BY department, DATE_FORMAT(login_date, '%Y-%m')
+    </select>
+
+
 </mapper>
